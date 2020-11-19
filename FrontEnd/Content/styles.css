@@ -1,0 +1,33 @@
+﻿body {
+}
+.td {
+    padding: 20px 8px 20px 8px !important;
+}
+.tdd {
+    padding: 20px 8px 20px 40px !important;
+}
+th {
+    padding:16px !important;
+}
+.tr {
+    background-color:lightblue;
+}
+.fab {
+    border-radius:49%;
+    float:right;
+    margin-top:-30px;
+}
+.input_boxes {
+    height: 30px;
+    /*padding:8px;*/
+    margin: 8px;
+    width: 260px !important;
+    border-radius: 6px;
+    border: 1.4px solid lightgrey;
+}
+    .input_boxes:focus {
+        border: 1.4px solid lightblue !important;
+    }
+    .input_boxes:hover {
+        border: 1.4px solid lightblue;
+    }
