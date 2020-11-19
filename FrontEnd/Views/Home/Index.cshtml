@@ -257,7 +257,9 @@
         }
     })
         .on('success.form.bv', function (e) {
-            $.ajax({ method: 'GET', url: 'https://localhost:44366/Home/addUser' }).done(function (response) {
+
+            var $form = $(e.target);
+            $.ajax({ method: 'POST', url: 'https://localhost:44366/Home/addUser', data: $form.serialize()}).done(function (response) {
                 swal("User Created!",
                     {
 
@@ -278,11 +280,6 @@
            
 
           
-
-            var $form = $(e.target);
-            $.post($form.attr('action'), $form.serialize(), function (result) {
-                console.log(result);
-            }, 'json');
         });
     
     </script>
