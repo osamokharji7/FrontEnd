@@ -3,16 +3,21 @@
     <table border="0" cellspacing="5" cellpadding="5">
         <tbody>
             <tr>
-                <td>Name</td>
+                <td>Search</td>
+                <td><input type="text" id="search"></td>
+                <td><button id="search_btn">Go</button></td>
+            </tr>
+            <tr>
+                <td>Filter by Name</td>
                 <td><input type="text" id="name"></td>
             </tr>
             <tr>
-                <td>State</td>
-                <td><input type="text" id="state"></td>
+                <td>Filter by State</td>
+                <td><select id="state"></select></td>
             </tr>
             <tr>
-                <td>City</td>
-                <td><input type="text" id="city"></td>
+                <td>Filter by City</td>
+                <td><select id="city"></select></td>
             </tr>
         </tbody>
     </table>
@@ -47,7 +52,26 @@
             { "data": "city" },
             { "data": "pncd" }
         ]
-    } );
+    });
+
+        $.ajax({ method: 'GET', url: 'https://localhost:44366/Home/GetCities' }).done(function (response) {
+            var arr = JSON.parse(response);
+            while (document.getElementById('cities').firstChild)
+                document.getElementById('cities').removeChild(document.getElementById('cities').firstChild);
+            for (var i = 0; i < arr.length; i++) {
+                document.getElementById('cities').add(new Option(arr[i].name, arr[i].id));
+            }
+        });
+        $.ajax({ method: 'GET', url: 'https://localhost:44366/Home/GetStates' }).done(function (response) {
+            var arr = JSON.parse(response);
+            while (document.getElementById('states').firstChild)
+                document.getElementById('states').removeChild(document.getElementById('states').firstChild);
+            for (var i = 0; i < arr.length; i++) {
+                document.getElementById('states').add(new Option(arr[i].name, arr[i].id));
+            }
+        }); 
+
+
     });
 
     $.fn.dataTable.ext.search.push(
@@ -67,7 +91,10 @@
     );
 
     $('#name, #state', '#city').change(function () {
-        table.draw();
+        $('#table').DataTable().draw();
+    });
+    $('#search_btn').click(function () {
+        $('#table').search($('#search').val()).draw();
     });
 
 </script>

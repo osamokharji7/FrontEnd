@@ -139,6 +139,8 @@
     $(document).ready(
         function () {
             $('#success_message').css('display', 'none');
+
+
            $.ajax({ method: 'GET', url: 'https://localhost:44366/Home/GetCities' }).done(function (response) {
                 var arr = JSON.parse(response);
                 while (document.getElementById('cities').firstChild)
