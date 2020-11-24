@@ -1,0 +1,73 @@
+﻿<html>
+<body>
+    <table border="0" cellspacing="5" cellpadding="5">
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" id="name"></td>
+            </tr>
+            <tr>
+                <td>State</td>
+                <td><input type="text" id="state"></td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td><input type="text" id="city"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Pin Code</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+</html>
+<script>
+    $(document).ready(function() {
+    $('#table').DataTable( {
+        "ajax": {
+            "url": "https://localhost:44366/Home/GetUsers",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "name" },
+            { "data": "email" },
+            { "data": "phone" },
+            { "data": "address" },
+            { "data": "state" },
+            { "data": "city" },
+            { "data": "pncd" }
+        ]
+    } );
+    });
+
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var name = $('#name').val();
+            var city = $('#city').val();
+            var state = $('#state').val();
+
+            if (data[0].includes(name) ||
+                data[4].includes(state) ||
+                data[5].includes(city) )
+            {
+                return true;
+            }
+            return false;
+        }
+    );
+
+    $('#name, #state', '#city').change(function () {
+        table.draw();
+    });
+
+</script>
